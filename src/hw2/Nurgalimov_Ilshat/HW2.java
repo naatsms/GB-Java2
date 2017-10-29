@@ -25,14 +25,10 @@ public class HW2 {
      */
 
     public static void main(String[] args) {
-
         String[][] wrongSizeArray = new String[3][5];
-        System.out.println(convertStringToNumber(wrongSizeArray));
-
         String[][] notNumberArray = new String[4][4];
-        System.out.println(convertStringToNumber(notNumberArray));
-
         String[][] array = new String[4][4];
+        //Заполняем массив array
         int a = 0;
         for(int i = 0; i < 4; i++){
             for(int j = 0; j < 4; j++){
@@ -40,12 +36,11 @@ public class HW2 {
                 a++;
             }
         }
-        System.out.println(convertStringToNumber(array));
-
         String[][] textArray = new String[4][4];
+        //Заполняем массив textArray из файла
         try {
             int b;
-            FileReader file = new FileReader("text.txt");
+            FileReader file = new FileReader("C://JAVA/GB/Java2/2/HW2/src/text.txt");
             char text = ' ';
             for(int i = 0; i < 4; i++){
                 for(int j = 0; j < 4; j++){
@@ -63,43 +58,39 @@ public class HW2 {
             file.close();
         } catch (IOException ex) {
             ex.printStackTrace();
+        } finally {
+            try {
+                //System.out.println(sumOfNumbers(wrongSizeArray));
+                //System.out.println(sumOfNumbers(notNumberArray));
+                System.out.println(sumOfNumbers(array));
+                System.out.println(sumOfNumbers(textArray));
+            } catch(ArrayIndexOutOfBoundsException ex) {
+                System.out.println("Not the correct size of the array!");
+            } catch(ArithmeticException ex) {
+                ex.printStackTrace();
+            }
+
+
         }
-        System.out.println(convertStringToNumber(textArray));
     }
 
-    public static String convertStringToNumber(String[][] array) {
+    public static int sumOfNumbers(String[][] array) throws ArrayIndexOutOfBoundsException, ArithmeticException {
         int sum = 0;
+        int indexArray1 = 0;
+        int indexArray2 = 0;
+        if(array.length != 4 || array[0].length != 4) throw new ArrayIndexOutOfBoundsException();
         try {
-            if(array.length != 4 || array[0].length != 4) {
-                throw new ArrayIndexOutOfBoundsException();
-            } else {
-                for(int i = 0; i < 4; i++) {
-                    for(int j = 0; j < 4; j++) {
-                        if(isDigit(array[i][j])) {
-                            sum += parseInt(array[i][j]);
-                        } else {
-                            throw new ArithmeticException("Inside the cell is not the number! " +
-                                    "Cell array [" + i + "] [" + j + "]");
-                        }
-                    }
+            for(int i = 0; i < 4; i++){
+                for(int j = 0; j < 4; j++){
+                    indexArray1 = i;
+                    indexArray2 = j;
+                    sum += parseInt(array[i][j]);
                 }
             }
-            return "Sum of numbers = " + sum;
-        } catch(ArrayIndexOutOfBoundsException exception) {
-            exception.printStackTrace();
-            return "Invalid array size!";
-        } catch (ArithmeticException exception) {
-            exception.printStackTrace();
-            return "Not a number!";
+        } catch (NumberFormatException exception){
+            throw new ArithmeticException("In the cell is not a number, a cell index [" + indexArray1 + "] ["
+                    + indexArray2 + "]");
         }
-    }
-
-    public static boolean isDigit(String s) {
-        try {
-            Integer.parseInt(s);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
+        return sum;
     }
 }
