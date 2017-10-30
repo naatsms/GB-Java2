@@ -24,7 +24,7 @@ public class Course {
         let[2] = (Let) water;
     }
     //Вывод информации о полосе препятствий
-    public void informationAboutTheObstacle() {
+    public void printInformationAboutTheObstacle() {
         System.out.println("Length track: " + ((Track) let[0]).getLength());
         System.out.println("Height wall: " + ((Wall) let[1]).getHeight());
         System.out.println("Length water: " + ((Water) let[2]).getLength());

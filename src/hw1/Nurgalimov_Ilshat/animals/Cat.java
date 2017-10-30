@@ -6,14 +6,23 @@ package animals;
  * @version (a version number or a date)
  */
 public class Cat extends Animal implements Jumpable, Swimable {
+    private final int RUN_LIMIT = 100;
+    private final int SWIM_LIMIT = 100;
+    private final float JUMP_LIMIT = 3.8f;
     private int swim_limit;
     private float jump_limit;
 
     public Cat(String name) {
         this.name = name;
-        this.run_limit = 100;
-        swim_limit = 100;
-        jump_limit = 3.8f;
+        this.run_limit = RUN_LIMIT;
+        swim_limit = SWIM_LIMIT;
+        jump_limit = JUMP_LIMIT;
+    }
+    public Cat(String name, int run_limit, int swim_limit, float jump_limit){
+        this.name = name;
+        this.run_limit = run_limit;
+        this.swim_limit = swim_limit;
+        this.jump_limit = jump_limit;
     }
 
     @Override

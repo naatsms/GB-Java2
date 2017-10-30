@@ -25,7 +25,7 @@ public class Team {
         }
     }
     // Вывод информации о членах команды
-    public void informationAboutTheTeam() {
+    public void printInformationAboutTheTeam() {
         System.out.println("Team: " + nameTeam);
         for(Animal a : teamAnimal) {
             System.out.println(a);

@@ -18,7 +18,7 @@ public abstract class Animal {
     
     @Override
     public String toString() {
-        return this.getClass().getName() + " " + name;
+        return this.getClass().getSimpleName() + " " + name;
     }
 
     public void setPassing(boolean passing){
