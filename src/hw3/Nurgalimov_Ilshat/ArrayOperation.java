@@ -3,7 +3,7 @@ import java.util.*;
 
 public class ArrayOperation {
 
-    public static ArrayList fillTheArray(ArrayList array) {
+    public static List<String> fillTheArray(List<String> array) {
         array.add("hello");
         array.add("Hello");
         array.add("car");
@@ -16,7 +16,7 @@ public class ArrayOperation {
         array.add("bye");
         return array;
     }
-    public static ArrayList fillTheArrayFromFile(ArrayList array, String fileName) throws IOException {
+    public static List<String> fillTheArrayFromFile(List<String> array, String fileName) throws IOException {
         StringBuffer buffer = new StringBuffer();
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
         while (reader.ready()) {
@@ -31,8 +31,8 @@ public class ArrayOperation {
         return array;
     }
 
-    public static void printUniqueWords(ArrayList<String> array) {
-        Set<String> tempArray = new TreeSet<>();
+    public static void printUniqueWords(List<String> array) {
+        Set<String> tempArray = new LinkedHashSet<>();
         for (String arr : array) {
             String a = arr.toLowerCase();
             tempArray.add(a);

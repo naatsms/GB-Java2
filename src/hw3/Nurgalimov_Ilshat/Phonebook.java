@@ -4,7 +4,7 @@ public class Phonebook {
 
     private Map<Integer, String> phonebook;
     Phonebook() {
-        phonebook = new TreeMap<>();
+        phonebook = new HashMap<>();
     }
     public void add(int number, String surname) {
         phonebook.put(number, surname);

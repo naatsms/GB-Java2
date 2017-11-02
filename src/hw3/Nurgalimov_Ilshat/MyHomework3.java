@@ -1,16 +1,17 @@
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
+
 
 /**
  *
  * Java. Level 2. Lesson 3. My homework
  * @author Ilshat Nurgalimov
- * @version 01.11.2017.
+ * @version 02.11.2017.
  * @task 3
  * @mark
  */
 public class MyHomework3 {
-    static final String FILE_NAME1 = "C://JAVA/GB/Java2Lesson3Homework3.txt";
+    static final String FILE_NAME1 = "C://JAVA/Java2Lesson3Homework3.txt";
     static final String FILE_NAME2 = "Java2Lesson3Homework3.txt";
 
     /**
@@ -28,7 +29,7 @@ public class MyHomework3 {
 
     public static void main(String[] args) {
         // first homework item
-        ArrayList<String> wordArray = new ArrayList<>();
+        List<String> wordArray = new ArrayList<String>();
         wordArray = ArrayOperation.fillTheArray(wordArray);
         System.out.println(wordArray + "\n");
         ArrayOperation.printUniqueWords(wordArray);
