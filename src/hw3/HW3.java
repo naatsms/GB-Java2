@@ -14,14 +14,14 @@ public class HW3 {
         WordList();
 
        Phonebook ph = new Phonebook();
-       ph.add("+7(916)-888-22-12", "Петров");
-        ph.add("+7(916)-999-33-13", "Иванов");
-        ph.add("+7(916)-222-33-12", "Сидоров");
-        ph.add("+7(916)-333-23-17", "Иванов");
-        ph.add("+7(916)-555-66-33", "Яковлев");
+       ph.add("+7(916)-888-22-12", "РџРµС‚СЂРѕРІ");
+        ph.add("+7(916)-999-33-13", "РРІР°РЅРѕРІ");
+        ph.add("+7(916)-222-33-12", "РЎРёРґРѕСЂРѕРІ");
+        ph.add("+7(916)-333-23-17", "РРІР°РЅРѕРІ");
+        ph.add("+7(916)-555-66-33", "РЇРєРѕРІР»РµРІ");
         ph.get();
-        ph.getName("Яковлев");
-        ph.getName("Иванов");
+        ph.getName("РЇРєРѕРІР»РµРІ");
+        ph.getName("РРІР°РЅРѕРІ");
         
     }
 
@@ -29,36 +29,36 @@ public class HW3 {
         int i = 1;
         int j = 1;
        ArrayList<String> list = new ArrayList<String>();
-        list.add("Яблоко");
-        list.add("Апельсин");
-        list.add("Манго");
-        list.add("Ананас");
-        list.add("Мандарин");
-        list.add("Банан");
-        list.add("Яблоко");
-        list.add("Финик");
-        list.add("Арбуз");
-        list.add("Дыня");
-        list.add("Манго");
-        list.add("Киви");
-        list.add("Курага");
-        list.add("Инжир");
-        list.add("Яблоко");
+        list.add("РЇР±Р»РѕРєРѕ");
+        list.add("РђРїРµР»СЊСЃРёРЅ");
+        list.add("РњР°РЅРіРѕ");
+        list.add("РђРЅР°РЅР°СЃ");
+        list.add("РњР°РЅРґР°СЂРёРЅ");
+        list.add("Р‘Р°РЅР°РЅ");
+        list.add("РЇР±Р»РѕРєРѕ");
+        list.add("Р¤РёРЅРёРє");
+        list.add("РђСЂР±СѓР·");
+        list.add("Р”С‹РЅСЏ");
+        list.add("РњР°РЅРіРѕ");
+        list.add("РљРёРІРё");
+        list.add("РљСѓСЂР°РіР°");
+        list.add("РРЅР¶РёСЂ");
+        list.add("РЇР±Р»РѕРєРѕ");
 
-        System.out.println("============= Создаем список =============");
+        System.out.println("============= РЎРѕР·РґР°РµРј СЃРїРёСЃРѕРє =============");
         for(Object o : list) {
-            System.out.println("Item №:" + i + " " + o);
+            System.out.println("Item ?:" + i + " " + o);
             i++;
         }
 
       HashSet<String> hs = new HashSet<>(list);
-        System.out.println("============= Исключаем повторения =============");
+        System.out.println("============= РСЃРєР»СЋС‡Р°РµРј РїРѕРІС‚РѕСЂРµРЅРёСЏ =============");
         for(Object o : hs) {
-            System.out.println("Item №:" + j + " " + o);
+            System.out.println("Item ?:" + j + " " + o);
             j++;
         }
 
-        System.out.println("============= Считаем слова =============");
+        System.out.println("============= РЎС‡РёС‚Р°РµРј СЃР»РѕРІР° =============");
         for(Object o : hs) {
             int y = 0;
             for(Object d : list){
@@ -66,7 +66,7 @@ public class HW3 {
                     y++;
                 }
                 }
-            System.out.println(o + " присутствует в списке " + y + " раз");
+            System.out.println(o + " РїСЂРёСЃСѓС‚СЃС‚РІСѓРµС‚ РІ СЃРїРёСЃРєРµ " + y + " СЂР°Р·");
             }
 
         }
@@ -84,14 +84,14 @@ public class HW3 {
           }
 
            public void get () {
-               System.out.println("============= Создаем справочник =============");
+               System.out.println("============= РЎРѕР·РґР°РµРј СЃРїСЂР°РІРѕС‡РЅРёРє =============");
                Set<Map.Entry<String, String>> set = ph.entrySet();
                for (Map.Entry<String, String> o : set)
                    System.out.println(o.getKey() + ": " + o.getValue());
            }
 
            public  void getName(String name) {
-               System.out.println("============= Поиск по списку =============");
+               System.out.println("============= РџРѕРёСЃРє РїРѕ СЃРїРёСЃРєСѓ =============");
                Set<Map.Entry<String, String>> set = ph.entrySet();
                for (Map.Entry<String, String> o : set)
                    if( name == o.getValue()) {
