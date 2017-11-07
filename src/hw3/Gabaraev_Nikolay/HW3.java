@@ -7,22 +7,23 @@
 
 import java.util.*;
 
-public class HW3 {
+public class Main {
 
     public static void main(String[] args) {
 
         WordList();
 
        Phonebook ph = new Phonebook();
-       ph.add("+7(916)-888-22-12", "Петров");
-        ph.add("+7(916)-999-33-13", "Иванов");
-        ph.add("+7(916)-222-33-12", "Сидоров");
-        ph.add("+7(916)-333-23-17", "Иванов");
-        ph.add("+7(916)-555-66-33", "Яковлев");
+
+        ph.add("Петров" , " +7(916)-888-22-12");
+        ph.add("Иванов" , " +7(916)-999-33-13");
+        ph.add("Сидоров" , " +7(916)-222-33-12");
+        ph.add("Иванов" , " +7(916)-333-23-17");
+        ph.add("Яковлев" , " +7(916)-555-66-33");
         ph.get();
         ph.getName("Яковлев");
         ph.getName("Иванов");
-        
+
     }
 
    static void WordList() {
@@ -47,14 +48,14 @@ public class HW3 {
 
         System.out.println("============= Создаем список =============");
         for(Object o : list) {
-            System.out.println("Item ?:" + i + " " + o);
+            System.out.println("Item №:" + i + " " + o);
             i++;
         }
 
       HashSet<String> hs = new HashSet<>(list);
         System.out.println("============= Исключаем повторения =============");
         for(Object o : hs) {
-            System.out.println("Item ?:" + j + " " + o);
+            System.out.println("Item №:" + j + " " + o);
             j++;
         }
 
@@ -78,8 +79,8 @@ public class HW3 {
           private String name;
           private String telNum;
 
-          public  String add (String telNum, String name) {
-              ph.put(telNum, name);
+          public  String add (String name, String telNum) {
+              ph.merge(name,telNum,(a, b) -> a + b);
               return (name);
           }
 
@@ -93,10 +94,7 @@ public class HW3 {
            public  void getName(String name) {
                System.out.println("============= Поиск по списку =============");
                Set<Map.Entry<String, String>> set = ph.entrySet();
-               for (Map.Entry<String, String> o : set)
-                   if( name == o.getValue()) {
-                       System.out.println(o.getKey() + ": " + o.getValue());
-                   }
+               System.out.println(name + " " + ph.get(name));
 
            }
      }
