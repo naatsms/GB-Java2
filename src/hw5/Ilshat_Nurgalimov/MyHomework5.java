@@ -25,6 +25,10 @@ public class MyHomework5 {
         }
         long b = System.currentTimeMillis();
         System.out.println("The first method took: " + (b - a) + " milliseconds.");
+        for(int i = 0, j = arr.length - 1; i < 10; i++, j--) {
+            System.out.println("arr[" + i + "]: " + arr[i]);
+            System.out.println("arr[" + j + "]: " + arr[j]);
+        }
     }
     public static void createAndPopulateAnArrayUsingThreads() {
         float[] arr = new float[size];
@@ -34,9 +38,9 @@ public class MyHomework5 {
 
         long a = System.currentTimeMillis();
         System.arraycopy(arr, 0, arr1, 0, h);
-        System.arraycopy(arr, h - 1, arr2, 0, h);
-        MyThread t1 = new MyThread("Thread-1", arr1);
-        MyThread t2 = new MyThread("Thread-2", arr2);
+        System.arraycopy(arr, h, arr2, 0, h);
+        MyThread t1 = new MyThread("Thread-1", arr1, 0);
+        MyThread t2 = new MyThread("Thread-2", arr2, h);
         t1.start();
         t2.start();
         try {
@@ -46,25 +50,31 @@ public class MyHomework5 {
             e.printStackTrace();
         }
         System.arraycopy(t1.arr, 0, arr, 0, h);
-        System.arraycopy(t2.arr, 0, arr, h - 1, h);
+        System.arraycopy(t2.arr, 0, arr, h, h);
         long b = System.currentTimeMillis();
         System.out.println("The second method took: " + (b - a) + " milliseconds.");
+        for(int i = 0, j = arr.length - 1; i < 10; i++, j--) {
+            System.out.println("arr[" + i + "]: " + arr[i]);
+            System.out.println("arr[" + j + "]: " + arr[j]);
+        }
     }
 }
 
 class MyThread extends Thread {
     float[] arr;
+    int count;
 
-    MyThread(String name, float[] arr) {
+    MyThread(String name, float[] arr, int count) {
         super(name);
         this.arr = arr;
+        this.count = count;
     }
 
     @Override
     public void run() {
         System.out.println("Start " + getName());
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = (float) (arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
+        for (int i = 0; i < arr.length; i++, count++) {
+            arr[i] = (float) (arr[i] * Math.sin(0.2f + count / 5) * Math.cos(0.2f + count / 5) * Math.cos(0.4f + count / 2));
         }
     }
 }
