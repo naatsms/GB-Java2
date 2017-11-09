@@ -1,6 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Date;
 import javax.swing.*;
 
@@ -13,8 +16,6 @@ import javax.swing.*;
  * @mark
  */
 
-class ChatWindow extends JFrame implements ActionListener {
-
 /*
  * 1. Создать окно для клиентской части чата: большое текстовое поле для отображения переписки в центре окна.
  * Однострочное текстовое поле для ввода сообщений и кнопка для отсылки сообщений на нижней панели. Сообщение должно
@@ -22,6 +23,8 @@ class ChatWindow extends JFrame implements ActionListener {
  * нижнего поля в центральное.
  * 2. * Задание повышенной сложности - все сообщения должны логгироваться (добавляться) в текстовый файл.
  */
+
+class ChatWindow extends JFrame implements ActionListener, WindowListener {
 
     final String TITLE_OF_PROGRAM = "Chat window";
     final int START_LOCATION = 200;
@@ -33,21 +36,22 @@ class ChatWindow extends JFrame implements ActionListener {
     private JButton enter;
     private JButton clear;
     private File file;
-    private Date date;
+    private Date date = new Date();
     private FileWriter writer;
     private FileReader reader;
     JTextArea dialogue; // area for dialog
     JTextField message; // field for entering messages
+    private static int windowCount = 0;
 
     public static void main(String[] args) {
         new ChatWindow();
     }
 
     ChatWindow() {
+        windowCount++;
         setTitle(TITLE_OF_PROGRAM);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setBounds(START_LOCATION, START_LOCATION, WINDOW_WIDTH, WINDOW_HEIGHT);
-        date = new Date();
         logFileName = convertedLogFileName(date.toString()) + ".txt";
         file = new File(logFileName);
         try {
@@ -68,6 +72,7 @@ class ChatWindow extends JFrame implements ActionListener {
         clear = new JButton(BTN_NEW_CHAT);
         enter.addActionListener(this);
         clear.addActionListener(this);
+        this.addWindowListener(this);
         // adding all elements to the window
         bp.add(message);
         bp.add(enter);
@@ -84,19 +89,10 @@ class ChatWindow extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if(event.getSource() == enter || event.getSource() == message) {
             if (message.getText().trim().length() > 0) {
+                dialogue.append(message.getText() + "\n");
                 try (FileWriter writer = new FileWriter(logFileName, true)){
                     writer.write(message.getText() + "\n");
                 } catch(Exception e) { }
-                finally {
-                    try(FileReader reader = new FileReader(logFileName)) {
-                        StringBuffer temp = new StringBuffer("");
-                        int c;
-                        while((c = reader.read()) != -1) {
-                            temp.append((char) c);
-                        }
-                        dialogue.setText(temp.toString());
-                    } catch(Exception e) { }
-                }
             }
             message.setText("");
             message.requestFocusInWindow();
@@ -108,5 +104,42 @@ class ChatWindow extends JFrame implements ActionListener {
         String temp1 = name.replace(" ", "");
         String temp2 = temp1.replace(":", "");
         return temp2;
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        e.getWindow().setVisible(false);
+        windowCount--;
+        if(windowCount == 0) System.exit(0);
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
     }
 }
