@@ -100,16 +100,16 @@ class HomeWork5 {
     }
 }
 
-class MyThread extends HomeWork5 implements Runnable {
+class MyThread implements Runnable {
     private float[] halfArray = new float[HomeWork5.h];
     private int firstElement;
     public Thread thread;
     
     MyThread(String name, float[] halfArray, int firstElement) {
-        thread = new Thread(this, name);
-        thread.start();
         this.halfArray = halfArray;
         this.firstElement = firstElement;
+        thread = new Thread(this, name);
+        thread.start();
     }
 
     public void run() {
