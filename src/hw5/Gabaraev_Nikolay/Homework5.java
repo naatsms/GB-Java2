@@ -28,7 +28,7 @@ public class Homework5 {
 
     }
 
-    public void method2 () {
+public void method2 () {
 
         final int size = 10000000;
         final int size2 = size /2;
@@ -49,8 +49,8 @@ public class Homework5 {
 
         try {
             System.out.println("Waiting for threads.");
-            MyThread mt1 = new MyThread("Child #1", a1);
-            MyThread2 mt2 = new MyThread2("Child #2", a2);
+            MyThread mt1 = new MyThread("Child #1", a1, "a1");
+            MyThread mt2 = new MyThread("Child #2", a2, "a2");
             mt1.thread.join();
             mt2.thread.join();
         }
@@ -66,69 +66,32 @@ public class Homework5 {
         long elapsedtime = fintime - startTime;
 
         System.out.println("Finish time: " + elapsedtime);
-
     }
 }
 
-
-class MyThread implements Runnable {
+class MyThread extends Thread {
     Thread thread;
-    static Math1 m1 = new Math1();
     float arr[];
+    String numarr;
 
-    MyThread(String name, float[] arr) {
+    MyThread(String name, float[] arr, String numarr) {
      thread = new Thread(this, name);
         this.arr = arr;
+        this.numarr = numarr;
         thread.start();
     }
 
     public void run() {
-
         System.out.println(thread.getName() + " is started.");
-        arr = m1.math1(arr);
-        System.out.println(thread.getName() + " is complete.");
-    }
-
-}
-
-class Math1 {
-      float arr[];
-    float[] math1(float[] nums) {
-        for(int i = 0; i<nums.length; i++) {
-            nums[i]=(float)(nums[i] * Math.sin(0.2f+ i/5)* Math.cos(0.2f+ i/5) * Math.cos(0.4f + i/2));
+        if(numarr == "a1") {
+            for (int i = 0; i < arr.length; i++) {
+                arr[i] = (float) (arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
+            }
+        }else if (numarr == "a2") {
+            for(int i = 0 , j = 5000000; i<arr.length; i++ ,j++) {
+                arr[i]=(float)(arr[i] * Math.sin(0.2f+ j/5)* Math.cos(0.2f+ j/5) * Math.cos(0.4f + j/2));
+            }
         }
-
-        return arr;
-    }
-}
-
-class MyThread2 implements Runnable {
-    Thread thread;
-    static Math2 m2 = new Math2();
-    float arr[];
-
-    MyThread2(String name, float[] arr) {
-        thread = new Thread(this, name);
-        this.arr = arr;
-        thread.start();
-    }
-
-    public void run() {
-
-        System.out.println(thread.getName() + " is started.");
-        arr = m2.math2(arr);
         System.out.println(thread.getName() + " is complete.");
-    }
-
-}
-
-class Math2 {
-    float arr[];
-    float[] math2(float[] nums) {
-        for(int i = 0 , j = 5000000; i<nums.length; i++ ,j++) {
-            nums[i]=(float)(nums[i] * Math.sin(0.2f+ j/5)* Math.cos(0.2f+ j/5) * Math.cos(0.4f + j/2));
-        }
-
-        return arr;
     }
 }
