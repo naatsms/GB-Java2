@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
@@ -36,9 +35,7 @@ class ChatWindow extends JFrame implements ActionListener, WindowListener {
     private JButton enter;
     private JButton clear;
     private File file;
-    private Date date = new Date();
-    private FileWriter writer;
-    private FileReader reader;
+    private Date date;
     JTextArea dialogue; // area for dialog
     JTextField message; // field for entering messages
     private static int windowCount = 0;
@@ -52,6 +49,7 @@ class ChatWindow extends JFrame implements ActionListener, WindowListener {
         setTitle(TITLE_OF_PROGRAM);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setBounds(START_LOCATION, START_LOCATION, WINDOW_WIDTH, WINDOW_HEIGHT);
+        date = new Date();
         logFileName = convertedLogFileName(date.toString()) + ".txt";
         file = new File(logFileName);
         try {
@@ -92,6 +90,8 @@ class ChatWindow extends JFrame implements ActionListener, WindowListener {
                 dialogue.append(message.getText() + "\n");
                 try (FileWriter writer = new FileWriter(logFileName, true)){
                     writer.write(message.getText() + "\n");
+                    writer.flush();
+                    writer.close();
                 } catch(Exception e) { }
             }
             message.setText("");
