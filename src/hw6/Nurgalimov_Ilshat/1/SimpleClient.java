@@ -2,8 +2,7 @@
  * Java. Level 2. Lesson 6. My homework.
  * Simple chat client
  *
- * @author Sergey Iryupin
- * @modified Ilshat Nurgalimov
+ * @author Ilshat Nurgalimov
  * @version dated 12.11.2017
  * @task 6
  * @mark

@@ -2,7 +2,7 @@
  * Java. Level 2. Lesson 6. My homework.
  * Simple server for chat
  *
- * @author Sergey Iryupin
+ * @author Ilshat Nurgalimov
  * @version 0.1 dated Jun 28, 2017
  * @task 6
  * @mark
